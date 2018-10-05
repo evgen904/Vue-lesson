@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+  line-height: 1.25;
+  text-align: left;
+  color: #000;
+  font: normal 14px Arial, Helvetica, sans-serif;
+  background: #fff;
+}
+a {
+  color: #c00a19;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  background: transparent;
+  text-decoration: underline;
+  outline-style: none;
+}
+a:hover {
+  color: #c00a19;
+  text-decoration: none;
+}
+hr {
+  border-top: 1px solid #bbb;
+}
+h1 {
+  color: #bf0a19;
+  font: normal 24px Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0 0 16px;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #bf0a19;
+  font-weight: normal;
+  font-style: normal;
+  margin: 12px 0;
+}
+h2 {
+  font-size: 22px;
+}
+h3 {
+  font-size: 20px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 14px;
+}
+.animate {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.gradient {
+  background-color: #f6f6f6;
+  background-image: -moz-linear-gradient(top, #fbfbfb, #efefef);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbfbfb), to(#efefef));
+  background-image: -webkit-linear-gradient(top, #fbfbfb, #efefef);
+  background-image: -o-linear-gradient(top, #fbfbfb, #efefef);
+  background-image: linear-gradient(to bottom, #fbfbfb, #efefef);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fbfbfb', endColorstr='#efefef', GradientType=0);
+}
+.block-form-cont input[type=text]::-webkit-input-placeholder,
+.block-form-cont textarea::-webkit-input-placeholder {
+  color: #999999;
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=100)";
+}
+.block-form-cont input[type=text]:moz-placeholder,
+.block-form-cont textarea:moz-placeholder {
+  color: #999999;
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=100)";
+}
+.block-form-cont input[type=text]::-moz-placeholder,
+.block-form-cont textarea::-moz-placeholder {
+  color: #999999;
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=100)";
+}
+.block-form-cont input[type=text]:-ms-input-placeholder,
+.block-form-cont textarea:-ms-input-placeholde {
+  color: #999999;
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=100)";
+}
+.block-form-cont input[type=text].placeholder,
+.block-form-cont textarea.placeholder {
+  color: #999999;
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=100)";
+}

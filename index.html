@@ -1,0 +1,110 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang="ru"> <!--<![endif]-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>title</title>
+    <link href="images/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="images/styles_dops.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="app">
+    <input type="text" v-on:input="cheangeName">
+    <h1>Hello {{ name }}</h1>
+    <h1>Sum (10+60): {{ 10 + 60 }}</h1>
+    <h1>NUmber: {{ number }}</h1>
+    <h1>Method: {{ sayHello() }}</h1>
+    <h1>If statement: {{ isOk ? 'I am OK' : 'I am not OK!' }}</h1>
+    <h2><a v-bind:href="url">{{ url }}</a></h2>
+    <h2 v-html="link"></h2>
+
+    <hr>   
+
+    <h2>Счетчик 1 = {{ counter }}</h2>
+    <button v-on:click="rizeCounter">Увеличить на 1</button>
+    <hr>
+    <h2 v-on:mouseover="onHover">Счетчик 2 = {{ counter2 }}</h2>
+    <button v-on:click="counter2++">Увеличить на 1</button>
+
+    <hr>
+
+    <h2>{{ title }} : {{ counter3 }}</h2>
+    <button v-on:click="sayHello2(5, 'Изменено на 5', $event)">Увеличить на 5</button>
+    <button v-on:click="sayHello2(10, 'Изменено на 10', $event)">Увеличить на 10</button>
+
+    <hr>
+    <h2>
+        <a href="http://google.com" target="_blank" v-on:click.prevent="">Google.com</a>
+    </h2>
+    <h2 v-on:mousemove="HandleMouseMove">
+        x: {{ x }} / y: {{ y }}
+        <span v-on:mousemove.stop="">Не изменять</span>
+    </h2>
+
+    <hr>
+
+    <input type="text" v-on:keyup.enter.space="alertValue">
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            name: 'Vue!',
+            number: 100,
+            isOk: true,
+            url: 'http://google.com',
+            link: '<a href="http://google.com">Google</a>>',
+            counter: 0,
+            counter2: 0,
+            title: 'Счетчик',
+            counter3: 0,
+            x: 0,
+            y: 0
+        },
+        methods: {
+            cheangeName: function(event){
+                this.name = event.target.value
+            },
+            sayHello: function () {
+                return 'I am function'
+            },
+            rizeCounter: function () {
+                this.counter++
+            },
+            onHover: function (event) {
+                event.target.style.color='green';
+            },
+            sayHello2: function (num, str, event) {
+                this.counter3 += num;
+                this.title = str;
+                if (num === 5) {
+                    event.target.style.color='blue';
+                } else if (num === 10) {
+                    event.target.style.color='red';
+                }
+            },
+            HandleMouseMove: function (event) {
+                this.x = event.clientX;
+                this.y = event.clientY;
+            },
+            alertValue: function (event) {
+                alert(event.target.value);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
