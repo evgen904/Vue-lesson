@@ -12,6 +12,31 @@
     <title>title</title>
     <link href="images/normalize.css" rel="stylesheet" type="text/css" />
     <link href="images/styles_dops.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        #app {
+            width: 900px;
+            margin: 60px auto;
+        }
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 1px solid #000000;
+            display: inline-block;
+            margin: 40px;
+        }
+        .red {
+            background: red;
+        }
+        .blue {
+            background: blue;
+        }
+        .green {
+            background: green;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -53,6 +78,121 @@
 
     <input type="text" v-on:keyup.enter.space="alertValue">
 
+    <hr>
+    <a :href="url">Google</a>
+    <br>
+    <h2>Счетчик new: {{ counter4 }}</h2>
+    <button @click="counter4++">Увеличить на 1</button>
+
+
+    <hr>
+    <!--<input type="text" @input="inputValue = $event.target.value" :value="inputValue">-->
+    <input type="text" v-model.lazy="inputValue">
+    <h2>{{ inputValue }}</h2>
+
+
+    <hr>
+
+    <!--<div-->
+            <!--class="circle"-->
+            <!--@click="isActive = !isActive"-->
+            <!--:class="{red: isActive, green: !isActive}"-->
+    <!--&gt;</div>-->
+
+    <div
+            class="circle"
+            @click="isActive = !isActive"
+            :class="getCssClasses"
+    ></div>
+    
+    <div
+            class="circle"
+            :class="[color, {red: isActive}]"
+    ></div>
+
+    <input type="text" v-model="color">
+
+    <hr>
+
+    <!--<div class="circle" :style="{background: color, height: height + 'px'}"></div>-->
+    <div class="circle" :style="circleClasses"></div>
+    <div class="circle" :style="[circleClasses, {width: height + 'px'}]"></div>
+    <input type="text" v-model="color">
+    <input type="text" v-model="height">
+
+    <hr>
+
+
+    <h2 v-if="isVisible">I am visible!</h2>
+    <!--<h2 v-if="!isVisible">No i am not!</h2>-->
+    <h2 v-else>No i am not!</h2>
+    <button @click="isVisible = !isVisible">Toggle</button>
+
+    <hr>
+    <h2 v-if="type === 'a'">A</h2>
+    <h2 v-else-if="type === 'b'">B</h2>
+    <h2 v-else-if="type === 'c'">C</h2>
+    <h2 v-else>not math</h2>
+    <input type="text" v-model="type">
+
+    <hr>
+    <template v-if="isVisible2">
+        <h2>I am title!</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, vitae!
+        </p>
+    </template>
+    <template v-else>
+        <h2 style="color: red;">I am title!</h2>
+        <p style="color: blue;">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, vitae!
+        </p>
+    </template>
+
+    <hr>
+
+    <h1 v-show="isVisible3">true</h1>
+    <h2 v-show="!isVisible3">false</h2>
+
+    <button @click="isVisible3 = !isVisible3">Click</button>
+
+
+    <hr>
+
+    <ul>
+        <li v-for="(person, index) in people">{{ index + 1 }} {{ person }}</li>
+    </ul>
+
+    <ul>
+        <li v-for="(person, index) in people2">{{ index + 1 }} {{ person.name }} - <b>{{ person.age }}</b></li>
+    </ul>
+
+    <ol>
+        <li v-for="num of 4">{{ num }}</li>
+    </ol>
+
+    <ul>
+        <li v-for="(value, key, index) of preson"><em>{{ index }}</em> <b> {{ key }} </b> {{ value }} </li>
+    </ul>
+
+    <hr>
+
+    <h1>Counter {{ counter8 }} / {{ counter9 }}</h1>
+    <h2>Result: {{ result() }}</h2>
+    <h2>Computed result: {{ computedResult }}</h2>
+
+    <button @click="add">Add</button>
+    <button @click="sub">Sub</button>
+    <button @click="counter9++">Add counter9</button>
+
+
+
+
+
+
+
+
+
 
 </div>
 
@@ -70,8 +210,35 @@
             counter2: 0,
             title: 'Счетчик',
             counter3: 0,
+            counter4: 0,
+            inputValue: 'Initial value',
             x: 0,
-            y: 0
+            y: 0,
+            isActive: false,
+            color: 'blue',
+            height: 100,
+            isVisible: true,
+            type: 'a',
+            isVisible2: true,
+            isVisible3: true,
+            people: [
+                'Vlad',
+                'Max',
+                'Elena',
+                'Volodya'
+            ],
+            people2: [
+                {name: 'Evgenoy', age: 20},
+                {name: 'Irina', age: 24},
+                {name: 'Artur', age: 30}
+            ],
+            preson: {
+                name: 'Max',
+                age: 30,
+                job: 'Frontend'
+            },
+            counter8: 0,
+            counter9: 0
         },
         methods: {
             cheangeName: function(event){
@@ -101,6 +268,40 @@
             },
             alertValue: function (event) {
                 alert(event.target.value);
+            },
+            add: function () {
+                this.counter8++
+                //this.condition = this.counter8 > 3 ? 'More than 3' : 'Less than 3'
+            },
+            sub: function () {
+                this.counter8--
+                //this.condition = this.counter8 > 3 ? 'More than 3' : 'Less than 3'
+            },
+            result: function () {
+                console.log('Result was called');
+                return this.counter8 > 3 ? 'More than 3' : 'Less than 3';
+            }
+        },computed: {
+            getCssClasses: function () {
+                return {
+                    'red': this.isActive,
+                    'green': !this.isActive
+                }
+            },
+            circleClasses: function () {
+                return {
+                    'background': this.color,
+                    'height': this.height + 'px'
+                }
+            },
+            computedResult: function () {
+                console.log('Computed result was called')
+                return this.counter8 > 3 ? 'More than 3' : 'Less than 3';
+            }
+        },
+        watch: {
+            counter8: function (val) {
+                console.log('From watch object', val);
             }
         }
     });
