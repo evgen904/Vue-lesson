@@ -14,7 +14,7 @@
     <link href="images/styles_dops.css" rel="stylesheet" type="text/css" />
 
     <style>
-        #app {
+        #app, #app2 {
             width: 900px;
             margin: 60px auto;
         }
@@ -186,19 +186,24 @@
     <button @click="counter9++">Add counter9</button>
 
 
+    <hr>
 
 
-
-
-
-
-
+    <h2>{{ title4 }}</h2>
+    <h2>{{ newField }}</h2>
+    <button @click="title4 = 'Update title'">Update title</button>
 
 </div>
 
+<div id="app2">
+    <h2>{{ title }}</h2>
+    <button @click="updateFirstTitle">Update first title</button>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script>
-    new Vue({
+    var vue1 = new Vue({
         el: '#app',
         data: {
             name: 'Vue!',
@@ -238,7 +243,8 @@
                 job: 'Frontend'
             },
             counter8: 0,
-            counter9: 0
+            counter9: 0,
+            title4: 'Hello i am Vue!'
         },
         methods: {
             cheangeName: function(event){
@@ -280,6 +286,9 @@
             result: function () {
                 console.log('Result was called');
                 return this.counter8 > 3 ? 'More than 3' : 'Less than 3';
+            },
+            alertFast: function () {
+                alert('I am vue!');
             }
         },computed: {
             getCssClasses: function () {
@@ -305,6 +314,29 @@
             }
         }
     });
+
+    console.log(vue1);
+
+    vue1.newField = 'Random text';
+
+    new Vue({
+        el: '#app2',
+        data: {
+            title: 'Hello i am Vue 2'
+        },
+        methods: {
+            updateFirstTitle: function () {
+                vue1.title4 = 'Update from second app'
+                vue1.newField = 'New newField!'
+                setTimeout(function (){
+                    vue1.alertFast()
+                },1000)
+            }
+        }
+    });
+
+
+
 </script>
 
 </body>
