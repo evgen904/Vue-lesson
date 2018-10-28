@@ -14,7 +14,7 @@
     <link href="images/styles_dops.css" rel="stylesheet" type="text/css" />
 
     <style>
-        #app, #app2 {
+        #app, #app2, #app3, .newEl {
             width: 900px;
             margin: 60px auto;
         }
@@ -193,12 +193,24 @@
     <h2>{{ newField }}</h2>
     <button @click="title4 = 'Update title'">Update title</button>
 
+    <hr>
+
+
+
+
 </div>
 
 <div id="app2">
     <h2>{{ title }}</h2>
     <button @click="updateFirstTitle">Update first title</button>
 </div>
+
+
+<hr>
+
+<div id="app3"></div>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
@@ -244,7 +256,8 @@
             },
             counter8: 0,
             counter9: 0,
-            title4: 'Hello i am Vue!'
+            title4: 'Hello i am Vue!',
+            title5: 'New text'
         },
         methods: {
             cheangeName: function(event){
@@ -289,6 +302,9 @@
             },
             alertFast: function () {
                 alert('I am vue!');
+            },
+            updateTitle5: function () {
+                this.title5 = 'new text2';
             }
         },computed: {
             getCssClasses: function () {
@@ -334,6 +350,51 @@
             }
         }
     });
+
+
+    var vue3 = new Vue({
+        data: {
+            title: 'Title text'
+        },
+        methods: {
+            updateTitle: function () {
+                this.title = 'Title text update !'
+                this.$refs.heading.style.color = 'red';
+                console.log(this.$refs);
+                console.log(this.$refs.horLine);
+            },
+            doDestoy: function () {
+                this.$destroy()
+            }
+        },
+        template: '<div class="newEl"><h1 ref="heading">{{ title }}</h1><p>Hello p</p><button @click="updateTitle()">Update title</button><button @click="doDestoy">doDestoy</button><hr ref="horLine"></div>',
+        beforeCreate: function () {
+            console.log('beforeCreate'); // Когда произошла инициализация и vue собирается создать приложение
+        },
+        created: function () {
+            console.log('created'); // vue приложение создано
+        },
+        beforeMount: function () {
+            console.log('beforeMount'); // vue шаблон начинает анализировать шаблон который мы заготовили (скомпелированный шаблон в дом дерево)
+        },
+        mounted: function () {
+            console.log('mounted'); // html дерево уже готово и оно уже вставленно в дом
+        },
+        beforeUpdate: function () {
+            console.log('beforeUpdate'); // сейчас будет обновление
+        },
+        update: function () {
+            console.log('update'); // изменения закончены (шаблон перерисован)
+        },
+        beforeDestroy: function () {
+            console.log('beforeDestroy'); // начало уичтожения приложения, через метод this.$destroy() не будет реагировать ни на какие действия и не будет занимать память
+        },
+        destroy: function () {
+            console.log('destroy'); // приложение уничтожилось
+        }
+    });
+
+    vue3.$mount('#app3');
 
 
 
