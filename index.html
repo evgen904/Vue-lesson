@@ -213,8 +213,39 @@
 
 
 
+<div id="app4">
+    <my-counter v-for="c in 4"></my-counter>
+</div>
+
+<div id="app5">
+    <my-counter></my-counter>
+</div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script>
+
+
+    var component = {
+        template: `
+            <div style="border: 1px solid #333; padding: 5px; margin: 0 auto 5px; width: 800px;">
+                <h2>Counter: {{ counter }}</h2>
+                <button @click="add">Add to counter</button>
+            </div>
+        `,
+        data: function(){
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            add: function(){
+                this.counter++
+            }
+        }
+    };
+
     var vue1 = new Vue({
         el: '#app',
         data: {
@@ -395,6 +426,25 @@
     });
 
     vue3.$mount('#app3');
+
+
+    new Vue({
+        el: '#app4',
+        components: {
+            'my-counter': component
+        }
+    });
+
+    new Vue({
+        el: '#app5',
+        components: {
+            myCounter: component
+        }
+    });
+
+
+
+
 
 
 
